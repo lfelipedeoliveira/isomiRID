@@ -1,0 +1,83 @@
+# This is the Configuration file for
+# Each variable must be separated by space.
+# If line starts with #, it will be considered as
+# a line comment, not configuration.
+# Bowtie settings
+# If bowtie is in your path, just call itself else,
+# put the entire path
+
+bowtie_path: /opt/bowtie/bowtie
+bowtie-build_path: /opt/bowtie/bowtie-build
+
+# Libraries:
+# Set the path to the libs (one per line)
+# the name for each lib (this name will be used in the final table) and
+# the format of each lib (fastq=fq, fasta=fa).
+
+lib: /home/user/refs/libraries/GEK08.fastq Sample1 fq
+lib: /home/user/refs/libraries/RTT0512.fq Sample2 fq
+lib: /home/user/refs/libraries/SEM201.fasta Sample3 fa
+lib: /home/user/refs/libraries/HDCC15.fa Sample3 fa
+
+# Main Reference:
+# Set the path to main reference (pre-miRNA p.e.)
+# and IF it is needed to build the index
+# for bowtie (bowtie-build)/("yes" or "no" )
+# PS: The nucleotide sequences of pre-microRNA
+# should be in the form of DNA (using T instead of U)
+
+main_ref: /home/user/refs/mirBASE/Hsa_pre_mirna.fa yes
+
+# Filter Reference:
+# Set the reference that will be used as a filter on
+# round 0 (e.g. Reference Genome or Transcriptome)
+# IF it is needed to build the index
+# for bowtie (bowtie-build)/
+# set "yes" or "no" if not.
+#
+# IF you do not want to perform the step of filtering,
+# add "no" after filter_ref:
+
+#filter_ref: no
+
+filter_ref: /home/user/refs/Genome/Hsa_v11.fa yes
+
+# Search for known miRNAs:
+# Set path to fasta file with known microRNAs.
+# This setting will create an additional output with
+# all sequences that have a known miRNA as a seed in his original sequence.
+# To ignore this step, set know_miRNA as "no"
+#
+# PS: The nucleotide sequences of microRNAs
+# should be in the form of DNA (using T instead of U)
+# known_miRNAs: no
+
+known_miRNAs: /home/user/refs/mirBASE/mature_mirna.fa
+
+# Addition and Rounds:
+# Set the addition analysis type to remove the last 3' and/or
+# 5' nucleotides, followed by the number of rounds.
+# If you don't want to perform 3' or 5' addition analysis
+# set a double "no" separate by a space
+#3add: no no
+#5add: no no
+
+M3: yes 4
+M5: yes 3
+
+# Cutoff Size:
+# Set the size range of reads that should be considered
+# on this analysis (min and max).
+
+RangeSize: 18 26
+
+# Cutoff abundance:
+# Set the cutoff of read abundance (amount of reads that must be present in all libs)
+# It is possible to apply more than one cutoffll
+# This option will generate two or more final tables (one for each cutoff).
+# If you don't want to use cutoff, set it as no:
+# cutoff: no
+
+cutoff: 20
+cutoff: 50
+cutoff: 100
